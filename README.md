@@ -1,8 +1,5 @@
 # Cmbpay
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cmbpay`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+非官方sdk, 开发文档详见： [http://openhome.cmbchina.com/pay/Default.aspx][1]
 
 ## Installation
 
@@ -22,22 +19,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### config
 
-## Development
+Create config/initializers/cmbpay.rb and put following configurations into it.
+```ruby
+# required
+Cmbpay.merchant_no = 'YOUR_MERCHANT_NO'
+Cmbpay.branch_no = 'YOUR_BRANCH_NO' # usually bank city area code
+Cmbpay.key = 'YOUR_KEY'
+Cmbpay.debug_mode = true # default is `true`
+Cmbpay.sandbox_mode = false # cmbchina test environment, default is `false`
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### APIs
+Check official document for detailed request params and return fields
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+#### MB_APPQRPay
+```ruby
+# required fields
+params = {
+         :orderNo => "123124",
+          :amount => "0.01",
+    :payNoticeUrl => "http://baidu.com",
+        :clientIP => "127.0.0.1"
+}
+r = Cmbpay::Service.mb_appqrpay params
+# => {
+#      :method => :post,
+#         :url => "http://121.15.180.66:801/netpayment/BaseHttp.dll?MB_APPQRPay",
+#     :payload => {
+#                 :charset => "utf-8",
+#         :jsonRequestData => "{\"version\":\"1.0\",\"signType\":\"SHA-256\",\"reqData\":{\"merchantNo\":\"YOUR_MERCHANT_NO\",\"branchNo\":\"YOUR_BRANCH_NO\",\"dateTime\":\"20180808110251\",\"date\":\"20180808\",\"orderNo\":\"123124\",\"amount\":\"0.01\",\"payNoticeUrl\":\"http://baidu.com\",\"clientIP\":\"127.0.0.1\"},\"sign\":\"50b51645e1b9201007511c5b11a8671c6ad8dde2eccb940e65da1ced414147dd\"}"
+#     }
+# }
+```
 
-## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/cmbpay. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the Cmbpay project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/cmbpay/blob/master/CODE_OF_CONDUCT.md).
+ [1]: http://openhome.cmbchina.com/pay/Default.aspx
