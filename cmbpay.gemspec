@@ -10,13 +10,13 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{An unofficial simple cmb netpayment gem}
   spec.description   = %q{An unofficial simple cmb netpayment gem, copied from alipay}
-  spec.homepage      = "http://gitlab8.sudiyi.cn/gems/cmbpay"
+  spec.homepage      = "https://github.com/zouchao/cmbpay"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "http://gitlab8.sudiyi.cn"
+    spec.metadata["allowed_push_host"] = "https://github.com/zouchao/cmbpay"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
       "public gem pushes."
