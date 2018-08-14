@@ -1,7 +1,7 @@
 require "cmbpay/version"
-require "Cmbpay/service"
-require "Cmbpay/utils"
-require "Cmbpay/sign"
+require "cmbpay/service"
+require "cmbpay/utils"
+require "cmbpay/sign"
 
 module Cmbpay
   @sign_type = 'SHA-256'
