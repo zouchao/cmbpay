@@ -29,7 +29,8 @@ rDc8lWtuG8EczVu8FwIDAQAB
       string = params_to_string(params['noticeData'])
       public_key = options['public_key'] || CMBPAY_RSA_PUBLIC_KEY
 
-      RSA.verify?(public_key, string, sign)
+      rsa = OpenSSL::PKey::RSA.new(public_key)
+      rsa.verify('sha1', Base64.decode64(sign), string)
     end
 
     def self.params_to_string(params)
@@ -38,4 +39,3 @@ rDc8lWtuG8EczVu8FwIDAQAB
 
   end
 end
-
