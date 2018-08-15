@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cmbpay (0.1.0)
+    cmbpay (0.1.2)
       rest-client (>= 2.0.0)
 
 GEM
@@ -12,9 +12,9 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    mime-types (3.1)
+    mime-types (3.2.2)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0521)
+    mime-types-data (3.2018.0812)
     netrc (0.11.0)
     rake (10.5.0)
     rest-client (2.0.2)
