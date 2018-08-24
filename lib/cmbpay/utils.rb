@@ -7,5 +7,9 @@ module Cmbpay
       end
       new_hash
     end
+
+    def self.params_to_string(params)
+      params.sort.map { |item| item.join('=') }.join('&')
+    end
   end
 end

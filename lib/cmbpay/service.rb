@@ -62,7 +62,7 @@ module Cmbpay
     end
 
 
-    QUERY_SETTLED_ORDER_BY_MERCHANT_DATE_REQUIRED_REQ_DATA = %w( beginDate endDate operatorNo)
+    QUERY_SETTLED_ORDER_BY_MERCHANT_DATE_REQUIRED_REQ_DATA = %w( beginDate endDate )
     # 按商户日期查询已结账订单API
     def self.query_settled_order_by_merchant_date(req_data, options = {})
       req_data = Utils.stringify_keys(req_data)
@@ -74,6 +74,7 @@ module Cmbpay
             'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
             'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
+            'operatorNo' => '9999',
           }.merge(req_data)
         }
       }
@@ -81,7 +82,7 @@ module Cmbpay
     end
 
 
-    QUERY_ACCOUNTlIST_REQUIRED_REQ_DATA = %w( date operatorNo )
+    QUERY_ACCOUNTlIST_REQUIRED_REQ_DATA = %w( date )
     # 查询入账明细API
     def self.query_accountList(req_data, options = {})
       req_data = Utils.stringify_keys(req_data)
@@ -93,6 +94,7 @@ module Cmbpay
             'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
             'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
+            'operatorNo' => '9999',
           }.merge(req_data)
         }
       }
@@ -124,7 +126,7 @@ module Cmbpay
       request_remote(get_gateway_url(__method__), sign_params(params, options))
     end
 
-    DO_REFUND_REQUIRED_REQ_DATA = %w( date orderNo amount operatorNo pwd )
+    DO_REFUND_REQUIRED_REQ_DATA = %w( date orderNo amount )
     # 退款API
     def self.do_refund(req_data, options = {})
       req_data = Utils.stringify_keys(req_data)
@@ -133,9 +135,11 @@ module Cmbpay
         'jsonRequestData' => {
           'charset'  => 'utf-8',
           'reqData'  => {
-            'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
+            'merchantNo' => options[:merchantNo] || Cmbpay.merchant_no,
             'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
+            'operatorNo' => '9999',
+            'pwd' => options.delete(:merchantNo) || Cmbpay.merchant_no,
           }.merge(req_data)
         }
       }
@@ -212,7 +216,7 @@ module Cmbpay
       end
 
       def sign_params(params, options = {})
-        options['key'] ||= Cmbpay.key
+        options[:key] ||= Cmbpay.key
         params['jsonRequestData'].merge!(
           'version'  => '1.0',
           'signType' => 'SHA-256',
@@ -221,10 +225,10 @@ module Cmbpay
         params
       end
 
-      def check_required_params(options, names)
+      def check_required_params(params, names)
         return unless Cmbpay.debug_mode?
         names.each do |name|
-          warn("Cmbpay Warn: missing required option: #{name}") unless options.has_key?(name)
+          warn("Cmbpay Warn: missing required option: #{name}") unless params.has_key?(name)
         end
       end
     end
