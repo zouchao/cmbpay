@@ -54,6 +54,25 @@ r = Cmbpay::Service.mb_appqrpay params
 # }
 ```
 
+### DoBusiness
+```ruby
+r = Cmbpay::Service.do_business
+
+# => "{\"version\":\"1.0\",\"charset\":\"UTF-8\",\"sign\":\"1D79589FEBD0BBCDE326862A0AA1FCB5B06E10B694C9DB0FEFF1FC8F5B3E21BA\",\"signType\":\"SHA-256\",\"rspData\":{\"rspCode\":\"SUC0000\",\"rspMsg\":\"查询成功\",\"fbPubKey\":\"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDZs4l8Ez3F4MG0kF7RRSL+pn8MmxVE3nfdXzjx6d3rH8IfDbNvNRLS0X0b5iJnPyFO8sbbUo1Im4zX0M8XA0xnnviGyn5E6occiyUXJRgokphWb5BwaYdVhnLldctdimHoJTk3NFEQFav3guygR54i3tymrDc8lWtuG8EczVu8FwIDAQAB\",\"dateTime\":\"20180824164250\"}}"
+```
+
+#### DoRefund
+```ruby
+params = {
+          :date => "20160515",
+       :orderNo => "9925343226347522701",
+        :amount => '0.01',
+    :operatorNo => "operatorNo", # Default is 9999
+           :pwd => "pwd" # Default is your merchant no
+}
+r = Cmbpay::Service.do_refund params
+# => "{\"version\":\"1.0\",\"charset\":\"UTF-8\",\"rspData\":{\"rspCode\":\"SUC0000\",\"rspMsg\":\"\",\"dateTime\":\"20160806150217\",\"bankSerialNo\":\"16280672300000000010\",\"currency\":\"10\",\"amount\":\"0.01\",\"refundRefNo\":\"608061000002\",\"bankDate\":\"20160806\",\"bankTime\":\"150052\",\"refundSerialNo\":\"123456789\",\"settleAmount\":\"0.01\",\"discountAmount\":\"0.01\"}}"
+```
 
 
  [1]: http://openhome.cmbchina.com/pay/Default.aspx

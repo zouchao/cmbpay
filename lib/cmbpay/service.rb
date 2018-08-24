@@ -64,7 +64,7 @@ module Cmbpay
 
     QUERY_SETTLED_ORDER_BY_MERCHANT_DATE_REQUIRED_REQ_DATA = %w( beginDate endDate operatorNo)
     # 按商户日期查询已结账订单API
-    def query_settled_order_by_merchant_date(req_data, options = {})
+    def self.query_settled_order_by_merchant_date(req_data, options = {})
       req_data = Utils.stringify_keys(req_data)
       check_required_params(req_data, QUERY_SETTLED_ORDER_BY_MERCHANT_DATE_REQUIRED_REQ_DATA)
       params = {
@@ -83,7 +83,7 @@ module Cmbpay
 
     QUERY_ACCOUNTlIST_REQUIRED_REQ_DATA = %w( date operatorNo )
     # 查询入账明细API
-    def query_accountList(req_data, options = {})
+    def self.query_accountList(req_data, options = {})
       req_data = Utils.stringify_keys(req_data)
       check_required_params(req_data, QUERY_ACCOUNTlIST_REQUIRED_REQ_DATA)
       params = {
@@ -126,7 +126,7 @@ module Cmbpay
 
     DO_REFUND_REQUIRED_REQ_DATA = %w( date orderNo amount operatorNo pwd )
     # 退款API
-    def do_refund(req_data, options = {})
+    def self.do_refund(req_data, options = {})
       req_data = Utils.stringify_keys(req_data)
       check_required_params(req_data, DO_REFUND_REQUIRED_REQ_DATA)
       params = {
@@ -144,7 +144,7 @@ module Cmbpay
 
     QUERY_REFUND_BY_DATE_REQUIRED_REQ_DATA = %w( beginDate endDate )
     # 按退款日期查询退款API
-    def query_refund_by_date(req_data, options = {})
+    def self.query_refund_by_date(req_data, options = {})
       req_data = Utils.stringify_keys(req_data)
       check_required_params(req_data, QUERY_REFUND_BY_DATE_REQUIRED_REQ_DATA)
       params = {
@@ -162,7 +162,7 @@ module Cmbpay
 
     QUERY_SETTLED_REFUND_REQUIRED_REQ_DATA = %w( type date )
     # 已处理退款查询API
-    def query_settled_refund(req_data, options = {})
+    def self.query_settled_refund(req_data, options = {})
       req_data = Utils.stringify_keys(req_data)
       check_required_params(req_data, QUERY_SETTLED_REFUND_REQUIRED_REQ_DATA)
       params = {
