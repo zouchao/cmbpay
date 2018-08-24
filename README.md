@@ -64,14 +64,14 @@ r = Cmbpay::Service.do_business
 #### DoRefund
 ```ruby
 params = {
-          :date => "20160515",
-       :orderNo => "9925343226347522701",
+          :date => "20160808",
+       :orderNo => "123124",
         :amount => '0.01',
     :operatorNo => "operatorNo", # Default is 9999
            :pwd => "pwd" # Default is your merchant no
 }
 r = Cmbpay::Service.do_refund params
-# => "{\"version\":\"1.0\",\"charset\":\"UTF-8\",\"rspData\":{\"rspCode\":\"SUC0000\",\"rspMsg\":\"\",\"dateTime\":\"20160806150217\",\"bankSerialNo\":\"16280672300000000010\",\"currency\":\"10\",\"amount\":\"0.01\",\"refundRefNo\":\"608061000002\",\"bankDate\":\"20160806\",\"bankTime\":\"150052\",\"refundSerialNo\":\"123456789\",\"settleAmount\":\"0.01\",\"discountAmount\":\"0.01\"}}"
+# => "{\"version\":\"1.0\",\"charset\":\"UTF-8\",\"rspData\":{\"rspCode\":\"SUC0000\",\"rspMsg\":\"\",\"dateTime\":\"20180808150217\",\"bankSerialNo\":\"16280672300000000010\",\"currency\":\"10\",\"amount\":\"0.01\",\"refundRefNo\":\"608061000002\",\"bankDate\":\"20180808\",\"bankTime\":\"150052\",\"refundSerialNo\":\"123456789\",\"settleAmount\":\"0.01\",\"discountAmount\":\"0.01\"}}"
 ```
 
 
