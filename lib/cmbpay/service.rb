@@ -33,15 +33,15 @@ module Cmbpay
         'charset'         => 'utf-8',
         'jsonRequestData' => {
           'reqData'  => {
-            'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
-            'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
+            'merchantNo' => options.delete(:merchant_no) || Cmbpay.merchant_no,
+            'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
             'date'       => Time.now.strftime('%Y%m%d'),
           }.merge(req_data)
         }
       }
 
-      request_args(get_gateway_url(__method__), sign_params(params, options))
+      request_args(get_gateway_url(__method__, options), sign_params(params, options))
     end
 
     # 查询招行公钥API
@@ -51,14 +51,14 @@ module Cmbpay
         'jsonRequestData' => {
           'charset'  => 'utf-8',
           'reqData'  => {
-            'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
-            'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
+            'merchantNo' => options.delete(:merchant_no) || Cmbpay.merchant_no,
+            'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
             'txCode'     => 'FBPK'
           }.merge(req_data)
         }
       }
-      request_remote(get_gateway_url(__method__), sign_params(params, options))
+      request_remote(get_gateway_url(__method__, options), sign_params(params, options))
     end
 
 
@@ -71,14 +71,14 @@ module Cmbpay
         'jsonRequestData' => {
           'charset'  => 'utf-8',
           'reqData'  => {
-            'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
-            'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
+            'merchantNo' => options.delete(:merchant_no) || Cmbpay.merchant_no,
+            'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
             'operatorNo' => '9999',
           }.merge(req_data)
         }
       }
-      request_remote(get_gateway_url(__method__), sign_params(params, options))
+      request_remote(get_gateway_url(__method__, options), sign_params(params, options))
     end
 
 
@@ -91,14 +91,14 @@ module Cmbpay
         'jsonRequestData' => {
           'charset'  => 'utf-8',
           'reqData'  => {
-            'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
-            'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
+            'merchantNo' => options.delete(:merchant_no) || Cmbpay.merchant_no,
+            'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
             'operatorNo' => '9999',
           }.merge(req_data)
         }
       }
-      request_remote(get_gateway_url(__method__), sign_params(params, options))
+      request_remote(get_gateway_url(__method__, options), sign_params(params, options))
     end
 
     QUERY_SINGLE_ORDER_REQUIRED_REQ_DATA = %w( type date )
@@ -117,13 +117,13 @@ module Cmbpay
         'jsonRequestData' => {
           'charset'  => 'utf-8',
           'reqData'  => {
-            'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
-            'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
+            'merchantNo' => options.delete(:merchant_no) || Cmbpay.merchant_no,
+            'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
           }.merge(req_data)
         }
       }
-      request_remote(get_gateway_url(__method__), sign_params(params, options))
+      request_remote(get_gateway_url(__method__, options), sign_params(params, options))
     end
 
     DO_REFUND_REQUIRED_REQ_DATA = %w( date orderNo amount )
@@ -136,14 +136,14 @@ module Cmbpay
           'charset'  => 'utf-8',
           'reqData'  => {
             'merchantNo' => options[:merchantNo] || Cmbpay.merchant_no,
-            'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
+            'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
             'operatorNo' => '9999',
-            'pwd' => options.delete(:merchantNo) || Cmbpay.merchant_no,
+            'pwd' => options.delete(:merchant_no) || Cmbpay.merchant_no,
           }.merge(req_data)
         }
       }
-      request_remote(get_gateway_url(__method__), sign_params(params, options))
+      request_remote(get_gateway_url(__method__, options), sign_params(params, options))
     end
 
     QUERY_REFUND_BY_DATE_REQUIRED_REQ_DATA = %w( beginDate endDate )
@@ -155,13 +155,13 @@ module Cmbpay
         'jsonRequestData' => {
           'charset'  => 'utf-8',
           'reqData'  => {
-            'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
-            'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
+            'merchantNo' => options.delete(:merchant_no) || Cmbpay.merchant_no,
+            'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
           }.merge(req_data)
         }
       }
-      request_remote(get_gateway_url(__method__), sign_params(params, options))
+      request_remote(get_gateway_url(__method__, options), sign_params(params, options))
     end
 
     QUERY_SETTLED_REFUND_REQUIRED_REQ_DATA = %w( type date )
@@ -173,21 +173,22 @@ module Cmbpay
         'jsonRequestData' => {
           'charset'  => 'utf-8',
           'reqData'  => {
-            'merchantNo' => options.delete(:merchantNo) || Cmbpay.merchant_no,
-            'branchNo'   => options.delete(:branchNo) || Cmbpay.branch_no,
+            'merchantNo' => options.delete(:merchant_no) || Cmbpay.merchant_no,
+            'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
           }.merge(req_data)
         }
       }
-      request_remote(get_gateway_url(__method__), sign_params(params, options))
+      request_remote(get_gateway_url(__method__, options), sign_params(params, options))
     end
 
     class << self
       private
 
-      def get_gateway_url(method)
-       prefix = Cmbpay.sandbox_mode ? 'SANDBOX_' : ''
-       self.const_get("#{prefix}#{method.upcase}_GATEWAY_URL")
+      def get_gateway_url(method, options={})
+        options[:sandbox_mode] ||= Cmbpay.sandbox_mode
+        prefix = options[:sandbox_mode] ? 'SANDBOX_' : ''
+        self.const_get("#{prefix}#{method.upcase}_GATEWAY_URL")
       end
 
       def request_args(gateway_url, params, options = {})
