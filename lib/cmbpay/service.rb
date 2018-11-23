@@ -135,7 +135,7 @@ module Cmbpay
         'jsonRequestData' => {
           'charset'  => 'utf-8',
           'reqData'  => {
-            'merchantNo' => options[:merchantNo] || Cmbpay.merchant_no,
+            'merchantNo' => options[:merchant_no] || Cmbpay.merchant_no,
             'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
             'operatorNo' => '9999',
