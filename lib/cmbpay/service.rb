@@ -131,15 +131,16 @@ module Cmbpay
     def self.do_refund(req_data, options = {})
       req_data = Utils.stringify_keys(req_data)
       check_required_params(req_data, DO_REFUND_REQUIRED_REQ_DATA)
+      merchant_no = options.delete(:merchant_no)
       params = {
         'jsonRequestData' => {
           'charset'  => 'utf-8',
           'reqData'  => {
-            'merchantNo' => options[:merchant_no] || Cmbpay.merchant_no,
+            'merchantNo' => merchant_no || Cmbpay.merchant_no,
             'branchNo'   => options.delete(:branch_no) || Cmbpay.branch_no,
             'dateTime'   => Time.now.strftime('%Y%m%d%H%M%S'),
             'operatorNo' => '9999',
-            'pwd' => options.delete(:merchant_no) || Cmbpay.merchant_no,
+            'pwd' => options.delete(:pwd) || merchant_no || Cmbpay.merchant_no,
           }.merge(req_data)
         }
       }
