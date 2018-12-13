@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cmbpay (0.1.5)
+    cmbpay (0.1.6)
       rest-client (>= 2.0.0)
 
 GEM
